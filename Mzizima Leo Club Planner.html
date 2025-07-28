@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leo Club Annual Plan 2025-2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .presentation-container {
+            width: 95vw;
+            max-width: 1200px;
+            height: 90vh;
+            max-height: 800px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100%;
+            padding: 30px 30px 80px 30px;
+            display: none;
+            flex-direction: column;
+            position: relative;
+            overflow-y: auto;
+        }
+
+        .slide.active {
+            display: flex;
+        }
+
+        .slide-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .slide-title {
+            font-size: 2.5em;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .slide-subtitle {
+            font-size: 1.2em;
+            color: #7f8c8d;
+            font-weight: 300;
+        }
+
+        .leo-badge {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            color: white;
+            margin: 0 auto 20px;
+            font-weight: bold;
+            box-shadow: 0 10px 20px rgba(243, 156, 18, 0.3);
+        }
+
+        .title-slide {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            justify-content: center;
+        }
+
+        .title-slide .slide-title {
+            color: white;
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .title-slide .slide-subtitle {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.3em;
+            margin-bottom: 30px;
+        }
+
+        .goals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .goal-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 25px;
+            border-radius: 15px;
+            color: white;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .goal-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .goal-icon {
+            font-size: 2em;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .goal-title {
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .goal-desc {
+            font-size: 0.95em;
+            line-height: 1.5;
+            opacity: 0.9;
+        }
+
+        .calendar-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .month-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border-left: 5px solid;
+            transition: transform 0.3s ease;
+        }
+
+        .month-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .service-month {
+            border-left-color: #27ae60;
+        }
+
+        .fundraiser-month {
+            border-left-color: #e74c3c;
+        }
+
+        .prep-month {
+            border-left-color: #f39c12;
+        }
+
+        .month-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .month-name {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
+        .month-type {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .service-type {
+            background: #d5f4e6;
+            color: #27ae60;
+        }
+
+        .fundraiser-type {
+            background: #fadbd8;
+            color: #e74c3c;
+        }
+
+        .prep-type {
+            background: #fdeaa7;
+            color: #f39c12;
+        }
+
+        .activity-title {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 8px;
+        }
+
+        .activity-desc {
+            font-size: 0.9em;
+            color: #7f8c8d;
+            line-height: 1.4;
+        }
+
+        .navigation {
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            background: rgba(255,255,255,0.95);
+            padding: 6px 12px;
+            border-radius: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .nav-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: #2980b9;
+            transform: scale(1.05);
+        }
+
+        .nav-btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .slide-counter {
+            background: #34495e;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+
+        .overview-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%);
+            padding: 25px;
+            border-radius: 15px;
+            color: white;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .implementation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .implementation-card {
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            padding: 20px;
+            border-radius: 12px;
+            color: white;
+        }
+
+        .implementation-title {
+            font-size: 1.1em;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .implementation-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .implementation-list li {
+            padding: 5px 0;
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .implementation-list li:before {
+            content: "✓ ";
+            margin-right: 8px;
+        }
+
+        .extra-activities {
+            background: #ecf0f1;
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+        }
+
+        .extra-title {
+            color: #2c3e50;
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .extra-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .extra-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .extra-item-title {
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 5px;
+        }
+
+        .extra-item-type {
+            font-size: 0.8em;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <!-- Title Slide -->
+        <div class="slide active title-slide">
+            <div class="leo-badge">LEO</div>
+            <h1 class="slide-title">Annual Plan 2025-2026</h1>
+            <p class="slide-subtitle">Alternating Monthly Activities</p>
+            <p style="font-size: 1.1em; margin-top: 30px;">Lionistic Year Strategic Planning</p>
+            <p style="font-size: 1em; opacity: 0.8; margin-top: 10px;">Prepared by: Sahal Harunani (Vice President)</p>
+        </div>
+
+        <!-- Goals & Objectives -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Goals & Objectives</h2>
+                <p class="slide-subtitle">Our Vision for Lionistic Year 2025-2026</p>
+            </div>
+            <div class="goals-grid">
+                <div class="goal-card">
+                    <span class="goal-icon">📈</span>
+                    <div class="goal-title">Membership Growth</div>
+                    <div class="goal-desc">Increase active membership by 15% through effective recruitment strategies, improved member retention, and creating an inclusive club environment that attracts diverse participants.</div>
+                </div>
+                <div class="goal-card">
+                    <span class="goal-icon">🤝</span>
+                    <div class="goal-title">Buddy System Implementation</div>
+                    <div class="goal-desc">Establish a structured mentorship program where experienced Leo members are paired with new members to provide guidance, support, and ensure smooth integration into club activities.</div>
+                </div>
+                <div class="goal-card">
+                    <span class="goal-icon">🎯</span>
+                    <div class="goal-title">Team Building Excellence</div>
+                    <div class="goal-desc">Conduct monthly team-building sessions to strengthen member relationships, improve collaboration, boost morale, and create a cohesive club culture that encourages participation.</div>
+                </div>
+                <div class="goal-card">
+                    <span class="goal-icon">🎤</span>
+                    <div class="goal-title">Leadership Development</div>
+                    <div class="goal-desc">Hold quarterly leadership and public speaking workshops to develop members' communication skills, confidence, and leadership capabilities for personal and professional growth.</div>
+                </div>
+                <div class="goal-card">
+                    <span class="goal-icon">📱</span>
+                    <div class="goal-title">Enhanced Visibility</div>
+                    <div class="goal-desc">Strengthen club visibility through strategic social media campaigns, regular newsletters, and increased community presence to attract new members and showcase our impact.</div>
+                </div>
+                <div class="goal-card">
+                    <span class="goal-icon">🌱</span>
+                    <div class="goal-title">Sustainable Projects</div>
+                    <div class="goal-desc">Design and implement sustainable, long-term projects that create lasting positive impact in our community while ensuring continuity beyond individual leadership terms.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Annual Overview -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Annual Overview</h2>
+                <p class="slide-subtitle">Alternating Service & Fundraising Schedule</p>
+            </div>
+            <div class="overview-stats">
+                <div class="stat-card">
+                    <div class="stat-number">12</div>
+                    <div class="stat-label">Months of Activities</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">6</div>
+                    <div class="stat-label">Service Projects</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">Fundraising Events</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">15%</div>
+                    <div class="stat-label">Membership Growth Target</div>
+                </div>
+            </div>
+            <div style="background: #ecf0f1; padding: 20px; border-radius: 10px; margin-top: 30px;">
+                <h3 style="color: #2c3e50; margin-bottom: 15px;">Schedule Pattern</h3>
+                <p style="color: #34495e; font-size: 1.1em; line-height: 1.6;">
+                    <strong>July:</strong> Leadership & Goal-Setting Meeting<br>
+                    <strong>Service Months:</strong> August, October, December, February, April, June<br>
+                    <strong>Fundraising Months:</strong> September, November, January, March, May
+                </p>
+            </div>
+        </div>
+
+        <!-- July-October Activities -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Q1 Activities Plan</h2>
+                <p class="slide-subtitle">July - October 2025</p>
+            </div>
+            <div class="calendar-container">
+                <div class="month-card prep-month">
+                    <div class="month-header">
+                        <div class="month-name">July 2025</div>
+                        <div class="month-type prep-type">Planning</div>
+                    </div>
+                    <div class="activity-title">🎯 Leadership & Goal-Setting Meeting</div>
+                    <div class="activity-desc">Strategic planning session to finalize annual goals, assign roles and responsibilities, establish committees, and align leadership team on key objectives and expectations for the Lionistic year.</div>
+                </div>
+
+                <div class="month-card service-month">
+                    <div class="month-header">
+                        <div class="month-name">August 2025</div>
+                        <div class="month-type service-type">Service</div>
+                    </div>
+                    <div class="activity-title">🍽️ Food Distribution Drive</div>
+                    <div class="activity-desc">Partner with local mosques, churches, and NGOs to distribute food packages to low-income families, orphanages, and vulnerable communities. Focus on nutritious staples and school feeding programs in underprivileged areas.</div>
+                </div>
+
+                <div class="month-card fundraiser-month">
+                    <div class="month-header">
+                        <div class="month-name">September 2025</div>
+                        <div class="month-type fundraiser-type">Fundraiser</div>
+                    </div>
+                    <div class="activity-title">🧠 Kahoot Trivia Night/Online Quiz</div>
+                    <div class="activity-desc">Host engaging virtual or in-person trivia competitions with entry fees. Include diverse categories like general knowledge, current affairs, and local culture to attract broad participation and generate funds for service activities.</div>
+                </div>
+
+                <div class="month-card service-month">
+                    <div class="month-header">
+                        <div class="month-name">October 2025</div>
+                        <div class="month-type service-type">Service</div>
+                    </div>
+                    <div class="activity-title">👁️ Eye Check-up Camp & Vision Awareness</div>
+                    <div class="activity-desc">Collaborate with optometrists and eye care professionals to provide free eye examinations for schoolchildren and community members. Create and distribute vision awareness posters in schools, markets, and community centers.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- November-February Activities -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Q2 Activities Plan</h2>
+                <p class="slide-subtitle">November 2025 - February 2026</p>
+            </div>
+            <div class="calendar-container">
+                <div class="month-card fundraiser-month">
+                    <div class="month-header">
+                        <div class="month-name">November 2025</div>
+                        <div class="month-type fundraiser-type">Fundraiser</div>
+                    </div>
+                    <div class="activity-title">🧁 Themed Bake Sale</div>
+                    <div class="activity-desc">Organize creative themed bake sales featuring local delicacies, seasonal treats, and healthy options. Partner with local bakers and Leo members' families to offer diverse products and maximize revenue generation.</div>
+                </div>
+
+                <div class="month-card service-month">
+                    <div class="month-header">
+                        <div class="month-name">December 2025</div>
+                        <div class="month-type service-type">Service</div>
+                    </div>
+                    <div class="activity-title">🌳 Tree Planting Campaign</div>
+                    <div class="activity-desc">Partner with local councils and environmental organizations to plant indigenous trees in schools, hospitals, and flood-prone areas. Combat climate change effects, promote environmental sustainability, and create green spaces for community benefit.</div>
+                </div>
+
+                <div class="month-card fundraiser-month">
+                    <div class="month-header">
+                        <div class="month-name">January 2026</div>
+                        <div class="month-type fundraiser-type">Fundraiser</div>
+                    </div>
+                    <div class="activity-title">🎬 Movie Night</div>
+                    <div class="activity-desc">Host community movie screenings featuring popular local and international films. Sell tickets, snacks, and beverages to generate funds while providing entertainment and social bonding opportunities for members and community.</div>
+                </div>
+
+                <div class="month-card service-month">
+                    <div class="month-header">
+                        <div class="month-name">February 2026</div>
+                        <div class="month-type service-type">Service</div>
+                    </div>
+                    <div class="activity-title">🏖️ Beach Clean-up</div>
+                    <div class="activity-desc">Organize comprehensive clean-up campaigns at Coco Beach and other coastal areas in Dar es Salaam. Promote environmental awareness, collect plastic waste for recycling, and educate the community about marine conservation.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- March-June Activities -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Q3 & Q4 Activities Plan</h2>
+                <p class="slide-subtitle">March - June 2026</p>
+            </div>
+            <div class="calendar-container">
+                <div class="month-card fundraiser-month">
+                    <div class="month-header">
+                        <div class="month-name">March 2026</div>
+                        <div class="month-type fundraiser-type">Fundraiser</div>
+                    </div>
+                    <div class="activity-title">🔍 Scavenger Hunt (Tentative)</div>
+                    <div class="activity-desc">Design interactive scavenger hunts across the city with entry fees and prizes. Include educational elements about local history, culture, and landmarks while creating fun team-building experiences for participants.</div>
+                </div>
+
+                <div class="month-card service-month">
+                    <div class="month-header">
+                        <div class="month-name">April 2026</div>
+                        <div class="month-type service-type">Service</div>
+                    </div>
+                    <div class="activity-title">🩸 Blood Donation Drive</div>
+                    <div class="activity-desc">Collaborate with national blood banks and hospitals to organize blood donation campaigns. Raise awareness about the importance of regular blood donation and help address critical blood shortage issues in healthcare facilities.</div>
+                </div>
+
+                <div class="month-card fundraiser-month">
+                    <div class="month-header">
+                        <div class="month-name">May 2026</div>
+                        <div class="month-type fundraiser-type">Fundraiser</div>
+                    </div>
+                    <div class="activity-title">🏃‍♂️ Leo Fun Run & Health Fair</div>
+                    <div class="activity-desc">Organize 5K/10K charity walkathons and fun runs with registration fees. Include health screenings, fitness demonstrations, and wellness booths to promote healthy living while raising funds for service projects.</div>
+                </div>
+
+                <div class="month-card service-month">
+                    <div class="month-header">
+                        <div class="month-name">June 2026</div>
+                        <div class="month-type service-type">Service</div>
+                    </div>
+                    <div class="activity-title">👕 Clothing & Blanket Drive</div>
+                    <div class="activity-desc">Collect and distribute gently used clothing, blankets, and essential items to orphanages, elderly homes, and disadvantaged families. Include recreational activities and gifts to bring joy to beneficiaries.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Extra Activities -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Additional Activities</h2>
+                <p class="slide-subtitle">Flexible Projects Throughout the Year</p>
+            </div>
+            <div class="extra-activities">
+                <div class="extra-title">🌟 Supplementary Service & Fundraising Options</div>
+                <div class="extra-grid">
+                    <div class="extra-item">
+                        <div class="extra-item-title">🎗️ Donate to Cancer Wards</div>
+                        <div class="extra-item-type">Service Activity</div>
+                        <div style="font-size: 0.9em; color: #7f8c8d; margin-top: 8px;">Visit hospital cancer wards to deliver comfort kits including snacks, scarves, activity books, and personal care items. Provide emotional support and companionship to cancer patients and their families.</div>
+                    </div>
+                    <div class="extra-item">
+                        <div class="extra-item-title">⚽ Youth Sports Day</div>
+                        <div class="extra-item-type">Fundraiser Activity</div>
+                        <div style="font-size: 0.9em; color: #7f8c8d; margin-top: 8px;">Organize inter-school sports competitions with entry fees, sponsorships, and vendor stalls. Promote youth engagement, healthy competition, and community unity.</div>
+                    </div>
+                    <div class="extra-item">
+                        <div class="extra-item-title">👴 Visit to Elderly Home</div>
+                        <div class="extra-item-type">Service Activity</div>
+                        <div style="font-size: 0.9em; color: #7f8c8d; margin-top: 8px;">Regular visits to elderly care facilities with gifts, entertainment programs, health check-ups, and companionship to address loneliness and provide support to senior citizens.</div>
+                    </div>
+                    <div class="extra-item">
+                        <div class="extra-item-title">🎨 Art & Craft Fair</div>
+                        <div class="extra-item-type">Fundraiser Activity</div>
+                        <div style="font-size: 0.9em; color: #7f8c8d; margin-top: 8px;">Showcase and sell handmade crafts, upcycled products, and local artwork. Include workshops on sustainable crafting and environmental awareness while generating revenue.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Communication & Tracking -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Communication & Evaluation</h2>
+                <p class="slide-subtitle">Staying Connected and Measuring Success</p>
+            </div>
+            <div class="implementation-grid">
+                <div class="implementation-card" style="background: linear-gradient(135deg, #fd79a8 0%, #fdcb6e 100%);">
+                    <div class="implementation-title">📱 Communication Plan</div>
+                    <ul class="implementation-list">
+                        <li>Weekly updates via WhatsApp groups</li>
+                        <li>Internal bulletin board for announcements</li>
+                        <li>Monthly digital newsletters</li>
+                        <li>Canva-designed posters and flyers</li>
+                        <li>Active social media presence</li>
+                    </ul>
+                </div>
+                <div class="implementation-card" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                    <div class="implementation-title">📊 Tracking & Evaluation</div>
+                    <ul class="implementation-list">
+                        <li>Club secretary tracks attendance and reports</li>
+                        <li>Monthly project evaluation forms</li>
+                        <li>Mid-year review in January 2026</li>
+                        <li>Year-end celebration and impact presentation</li>
+                        <li>Continuous feedback collection system</li>
+                    </ul>
+                </div>
+                <div class="implementation-card" style="background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);">
+                    <div class="implementation-title">🎯 Success Metrics</div>
+                    <ul class="implementation-list">
+                        <li>15% membership growth achievement</li>
+                        <li>100% completion of planned activities</li>
+                        <li>Active buddy system implementation</li>
+                        <li>Quarterly leadership workshops conducted</li>
+                        <li>Enhanced community visibility</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Implementation Strategy -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Implementation Strategy</h2>
+                <p class="slide-subtitle">Making Our Plan a Reality</p>
+            </div>
+            <div class="implementation-grid">
+                <div class="implementation-card">
+                    <div class="implementation-title">📋 Planning & Preparation</div>
+                    <ul class="implementation-list">
+                        <li>Form activity committees 6 weeks in advance</li>
+                        <li>Secure partnerships and permits early</li>
+                        <li>Create detailed budgets and timelines</li>
+                        <li>Assign activity leaders and support teams</li>
+                        <li>Develop comprehensive marketing strategies</li>
+                    </ul>
+                </div>
+                <div class="implementation-card">
+                    <div class="implementation-title">🤝 Partnership Development</div>
+                    <ul class="implementation-list">
+                        <li>Local NGOs and community organizations</li>
+                        <li>Schools and educational institutions</li>
+                        <li>Healthcare facilities and clinics</li>
+                        <li>Corporate sponsors and local businesses</li>
+                        <li>Government agencies and councils</li>
+                    </ul>
+                </div>
+                <div class="implementation-card">
+                    <div class="implementation-title">💰 Resource Management</div>
+                    <ul class="implementation-list">
+                        <li>Maintain 60% service, 40% operational split</li>
+                        <li>Establish emergency fund (15% of budget)</li>
+                        <li>Track all financial transactions</li>
+                        <li>Monthly treasurer reports</li>
+                        <li>Transparent budget presentations</li>
+                    </ul>
+                </div>
+                <div class="implementation-card">
+                    <div class="implementation-title">📈 Member Engagement</div>
+                    <ul class="implementation-list">
+                        <li>Buddy system for new member integration</li>
+                        <li>Monthly team-building activities</li>
+                        <li>Recognition and awards program</li>
+                        <li>Skill development opportunities</li>
+                        <li>Leadership rotation and mentorship</li>
+                    </ul>
+                </div>
+                <div class="implementation-card">
+                    <div class="implementation-title">🎯 Quality Assurance</div>
+                    <ul class="implementation-list">
+                        <li>Pre-activity planning sessions</li>
+                        <li>Real-time monitoring during events</li>
+                        <li>Post-activity evaluation meetings</li>
+                        <li>Beneficiary feedback collection</li>
+                        <li>Continuous improvement processes</li>
+                    </ul>
+                </div>
+                <div class="implementation-card">
+                    <div class="implementation-title">🌟 Sustainability Focus</div>
+                    <ul class="implementation-list">
+                        <li>Long-term project planning approach</li>
+                        <li>Environmental sustainability in all activities</li>
+                        <li>Knowledge transfer to future leaders</li>
+                        <li>Community capacity building focus</li>
+                        <li>Measurable impact documentation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call to Action -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Moving Forward Together</h2>
+                <p class="slide-subtitle">Next Steps for Leadership Team</p>
+            </div>
+            <div style="background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); padding: 30px; border-radius: 15px; color: white; text-align: center; margin: 30px 0;">
+                <h3 style="font-size: 1.5em; margin-bottom: 20px;">🚀 Ready to Make an Impact?</h3>
+                <p style="font-size: 1.1em; line-height: 1.6;">
+                    This comprehensive alternating plan will establish our Leo Club as a consistent force for positive change in Tanzania. 
+                    Through strategic service projects and sustainable fundraising, we'll achieve our 15% membership growth target and create lasting community impact.
+                </p>
+            </div>
+            <div class="goals-grid">
+                <div class="goal-card" style="background: linear-gradient(135deg, #fd79a8 0%, #fdcb6e 100%);">
+                    <span class="goal-icon">✅</span>
+                    <div class="goal-title">Immediate Actions</div>
+                    <div class="goal-desc">
+                        • Approve alternating activity schedule<br>
+                        • Assign monthly activity champions<br>
+                        • Begin July leadership meeting prep<br>
+                        • Launch buddy system planning<br>
+                        • Start partnership outreach
+                    </div>
+                </div>
+                <div class="goal-card" style="background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);">
+                    <span class="goal-icon">📅</span>
+                    <div class="goal-title">Implementation Timeline</div>
+                    <div class="goal-desc">
+                        • Week 1: Committee formation<br>
+                        • Week 2: Partnership meetings<br>
+                        • Week 3: Budget and logistics<br>
+                        • Week 4: Communication setup<br>
+                        • Month 1: Launch activities
+                    </div>
+                </div>
+                <div class="goal-card" style="background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%);">
+                    <span class="goal-icon">🎯</span>
+                    <div class="goal-title">Success Commitment</div>
+                    <div class="goal-desc">
+                        • 100% leadership participation<br>
+                        • Monthly progress evaluations<br>
+                        • Flexible adaptation when needed<br>
+                        • Celebration of milestones<br>
+                        • Sustainable project legacy
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="navigation">
+            <button class="nav-btn" id="prevBtn" onclick="previousSlide()">◀ Previous</button>
+            <span class="slide-counter" id="slideCounter">1 / 10</span>
+            <button class="nav-btn" id="nextBtn" onclick="nextSlide()">Next ▶</button>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            
+            document.getElementById('slideCounter').textContent = `${currentSlide + 1} / ${totalSlides}`;
+            
+            document.getElementById('prevBtn').disabled = currentSlide === 0;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                showSlide(currentSlide + 1);
+            }
+        }
+
+        function previousSlide() {
+            if (currentSlide > 0) {
+                showSlide(currentSlide - 1);
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') previousSlide();
+        });
+
+        // Initialize
+        showSlide(0);
+    </script>
+</body>
+</html>
