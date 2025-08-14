@@ -369,6 +369,126 @@
             color: #7f8c8d;
             font-style: italic;
         }
+        /* Mobile-specific adjustments */
+        @media (max-width: 768px) {
+            body {
+                padding: 5px;
+            }
+
+            .presentation-container {
+                height: calc(100vh - 10px);
+                border-radius: 10px;
+            }
+
+            .slide {
+                padding: 10px 10px 60px 10px;
+            }
+
+            .goals-grid,
+            .calendar-container,
+            .implementation-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .overview-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .extra-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .month-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+
+            .navigation {
+                bottom: 5px;
+                padding: 6px 10px;
+                width: calc(100% - 10px);
+            }
+
+            .nav-btn {
+                padding: 8px 12px;
+                font-size: 0.8em;
+                min-width: 60px;
+            }
+
+            .slide-counter {
+                font-size: 0.75em;
+                padding: 6px 10px;
+            }
+
+            .leo-badge {
+                width: clamp(150px, 45vw, 200px);
+                height: clamp(150px, 45vw, 200px);
+                font-size: clamp(0.9em, 2.5vw, 1.2em);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .slide {
+                padding: 8px 8px 55px 8px;
+            }
+
+            .slide-title {
+                font-size: clamp(1.3em, 5vw, 2em);
+            }
+
+            .overview-stats {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .stat-number {
+                font-size: 1.8em;
+            }
+
+            .goal-card,
+            .month-card,
+            .implementation-card {
+                padding: 15px;
+            }
+
+            .activity-desc,
+            .goal-desc {
+                font-size: 0.8em;
+            }
+        }
+
+        /* Touch improvements */
+        @media (hover: none) and (pointer: coarse) {
+            .nav-btn:hover {
+                transform: none;
+            }
+            
+            .goal-card:hover,
+            .month-card:hover {
+                transform: none;
+            }
+        }
+
+        /* Landscape mobile optimization */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .presentation-container {
+                height: calc(100vh - 5px);
+            }
+            
+            .slide {
+                padding: 5px 10px 50px 10px;
+            }
+            
+            .slide-header {
+                margin-bottom: 10px;
+            }
+            
+            .leo-badge {
+                width: clamp(120px, 30vw, 150px);
+                height: clamp(120px, 30vw, 150px);
+            }
+        }
     </style>
 </head>
 <body>
@@ -830,4 +950,5 @@
     </script>
 </body>
 </html>
+
 
